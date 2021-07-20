@@ -13,7 +13,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			characters: [],
+			favorites: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -41,6 +43,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			setCharacters: () => {
+				fetch("https://www.swapi.tech/api/people")
+					.then(resp => resp.json())
+					.then(data => {
+						setStore({ characters: data.results });
+					});
 			}
 		}
 	};
